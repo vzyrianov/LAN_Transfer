@@ -30,9 +30,8 @@ namespace LanTransfer
         {
             filepath = path;
             potentialAddresses = new ObservableCollection<PotentialAddress>();
-            potentialAddresses.Add(new PotentialAddress("192.16.1.1"));
             InitializeComponent();
-            dataGrid.DataContext = potentialAddresses;
+            dataGrid.ItemsSource = potentialAddresses;
         }
 
         void WaitForConnections()
@@ -49,6 +48,11 @@ namespace LanTransfer
                 server.Send(responseData, responseData.Length, clientEndPoint);
                 potentialAddresses.Add(new PotentialAddress(clientEndPoint.Address.ToString()));
             }
+        }
+
+        private void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            dataGrid.Columns[0].Width = dataGrid.Width;
         }
     }
 }
