@@ -1,0 +1,14 @@
+<html>
+
+<body>
+{% for filename in files %}
+
+<p>
+<a href="/file?filename={{ filename }}"> {{ filename }} </a>
+</p>
+
+{% endfor %}
+
+</body>
+
+</html>
