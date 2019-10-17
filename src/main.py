@@ -7,11 +7,19 @@ from os.path import isfile, join
 
 import random
 import string
+import socket
 
 app = Flask(__name__)
 app.config["DEBUG"] = True
 
 password = ""
+
+def get_local_ip():
+   s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+   s.connect(("8.8.8.8", 80))
+   result = s.getsockname()
+   s.close()
+   return result[0]
 
 def generate_random_password():
    letters = string.ascii_letters
@@ -59,4 +67,5 @@ def file():
 if __name__ == '__main__':
    password = generate_random_password()
    print(password)
+   print(get_local_ip())
    app.run(host='0.0.0.0', debug=True)
